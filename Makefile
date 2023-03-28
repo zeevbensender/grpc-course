@@ -37,13 +37,13 @@ else
 endif
 
 .DEFAULT_GOAL := help
-.PHONY: greet blog calculator help
-project := greet calculator blog
+.PHONY: greet blog adder help
+project := greet adder blog
 
 all: $(project) ## Generate Pbs and build
 
 greet: $@ ## Generate Pbs and build for greet
-calculator: $@ ## Generate Pbs and build for calculator
+adder: $@ ## Generate Pbs and build for adder
 blog: $@ ## Generate Pbs and build for blog
 
 $(project):
@@ -55,7 +55,7 @@ $(project):
 test: all ## Launch tests
 	go test ./...
 
-clean: clean_greet clean_calculator clean_blog ## Clean generated files
+clean: clean_greet clean_adder clean_blog ## Clean generated files
 	${RM_F_CMD} ssl/*.crt
 	${RM_F_CMD} ssl/*.csr
 	${RM_F_CMD} ssl/*.key
@@ -65,8 +65,11 @@ clean: clean_greet clean_calculator clean_blog ## Clean generated files
 clean_greet: ## Clean generated files for greet
 	${RM_F_CMD} greet/${PROTO_DIR}/*.pb.go
 
-clean_calculator: ## Clean generated files for calculator
-	${RM_F_CMD} calculator/${PROTO_DIR}/*.pb.go
+clean_adder: ## Clean generated files for adder
+	${RM_F_CMD} adder/${PROTO_DIR}/*.pb.go
+
+clean_adder: ## Clean generated files for adder
+	${RM_F_CMD} adder/${PROTO_DIR}/*.pb.go
 
 clean_blog: ## Clean generated files for blog
 	${RM_F_CMD} blog/${PROTO_DIR}/*.pb.go
